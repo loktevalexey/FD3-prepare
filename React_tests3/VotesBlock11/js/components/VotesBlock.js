@@ -17,6 +17,8 @@ class VotesBlock extends React.Component {
       showMode:this.props.showMode, // режим отображения - 1=результаты 2=голосование
       selectedAnswer:2, // код ответа, который сейчас выбран
       };
+    this.change1=this.change1.bind(this);
+    this.change2=this.change2.bind(this);
   }
 
   answerChanged(answerCode) {
@@ -38,7 +40,16 @@ class VotesBlock extends React.Component {
     this.setState({showMode:1});
   }
 
+  change1(EO) {
+    this.setState({});
+  }
+
+  change2(EO) {
+    this.setState({});
+  }
+
   render(){
+    console.log("VotesBlock render");
     var answersCode=this.state.info.answers.map(v=>
       <VoteAnswer key={v.code} 
         code={v.code} text={v.text} freeinput={v.freeinput} count={v.count} 
@@ -53,6 +64,8 @@ class VotesBlock extends React.Component {
       ;
     return (
       <div className="VotesBlock">
+        <input type="button" value="change N1" onClick={this.change1} />
+        <input type="button" value="change N2" onClick={this.change2} />
         <div className="Question">{this.state.info.question}</div>
         <div className="Answers">{answersCode}</div>
         {buttonCode}

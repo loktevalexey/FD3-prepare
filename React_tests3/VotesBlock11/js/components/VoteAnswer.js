@@ -2,6 +2,7 @@
 
 var React = require('react');
 var EventEmitter = require('events').EventEmitter;
+//const shallowEqual = require('shallowequal');
 
 var voteEvents = require('../VoteEvents');
 
@@ -21,6 +22,18 @@ class VoteAnswer extends React.Component {
       };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    var currState=this.state;
+    return (
+      nextState.code!=currState.code ||
+      nextState.count!=currState.count ||
+      nextState.text!=currState.text ||
+      nextState.showMode!=currState.showMode ||
+      nextState.freeinput!=currState.freeinput ||
+      nextState.selected!=currState.selected
+      );
+  }
+
   componentWillReceiveProps(newProps) { 
     this.setState({ 
       count: newProps.count,
@@ -34,6 +47,7 @@ class VoteAnswer extends React.Component {
   }
 
   render(){
+    console.log("VoteAnswer render");
     return (
       (this.state.showMode==1)
       ?
